@@ -34,27 +34,27 @@ def train(args):
                             v2.Resize(size=(64,64), interpolation=v2.InterpolationMode.NEAREST)])
 
     if args.dataset == "oxford":
-        train_data = OxfordPetsCustom(root="path_to_dataset", 
+        train_data = OxfordPetsCustom(root="dlvc/dataset/oxfordpets.py", 
                                 split="trainval",
                                 target_types='segmentation', 
                                 transform=train_transform,
                                 target_transform=train_transform2,
                                 download=True)
 
-        val_data = OxfordPetsCustom(root="path_to_dataset", 
+        val_data = OxfordPetsCustom(root="dlvc/dataset/oxfordpets.py", 
                                 split="test",
                                 target_types='segmentation', 
                                 transform=val_transform,
                                 target_transform=val_transform2,
                                 download=True)
     if args.dataset == "city":
-        train_data = CityscapesCustom(root="path_to_dataset", 
+        train_data = CityscapesCustom(root="./cityscapes_assg2/leftImg8bit", 
                                 split="train",
                                 mode="fine",
                                 target_type='semantic', 
                                 transform=train_transform,
                                 target_transform=train_transform2)
-        val_data = CityscapesCustom(root="/data/databases/cityscapes", 
+        val_data = CityscapesCustom(root="./cityscapes_assg2/leftImg8bit", 
                                 split="val",
                                 mode="fine",
                                 target_type='semantic', 
@@ -71,7 +71,7 @@ def train(args):
         # e.g. load pretrained weights with: state_dict = torch.load("path to model", map_location='cpu')
         ...
         ##
-        state_dict = torch.load("path_to_pretrained_model", map_location='cpu')
+        state_dict = torch.load("path_to_pretrained_model", map_location='cpu') #?
         model.encoder.load_state_dict(state_dict, strict=False)
 
     model.to(device)
